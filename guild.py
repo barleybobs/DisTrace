@@ -43,28 +43,21 @@ else:
 
 # Get widget API
 response = requests.get("https://discord.com/api/guilds/" + guild_id + "/widget.json")
+response = response.json()
 
 print("\n\x1b[1m\x1b[4mWidget JSON API\x1b[0m")
-if response.status_code == 200:
-    # If request succeeded
-    # Process JSON response
-    response = response.json()
+if "code" not in response:
+    # If widget is enabled for the server
+    # Output info from widget API
+    print(f"\x1b[1mNAME                  \x1b[0m{response["name"]}")
+    print(f"\x1b[1mGUILD_ID              \x1b[0m{response["id"]}")
+    print(f"\x1b[1mINVITE                \x1b[0m{response["instant_invite"]}")
+    print(f"\x1b[1mWIDGET HTML           \x1b[0mhttps://discord.com/widget?id={response["id"]}")
 
-    if "code" not in response:
-        # If widget is enabled for the server
-        # Output info from widget API
-        print(f"\x1b[1mNAME                  \x1b[0m{response["name"]}")
-        print(f"\x1b[1mGUILD_ID              \x1b[0m{response["id"]}")
-        print(f"\x1b[1mINVITE                \x1b[0m{response["instant_invite"]}")
-        print(f"\x1b[1mWIDGET HTML           \x1b[0mhttps://discord.com/widget?id={response["id"]}")
+    print(f"\n\x1b[1mAPPROX PRESENCE COUNT \x1b[0m{response["presence_count"]}")
 
-        print(f"\n\x1b[1mAPPROX PRESENCE COUNT \x1b[0m{response["presence_count"]}")
-
-    else:
-        # If widget not enabled for the server then present an error message
-        print("Widget not enabled")
 else:
-    # If the request to the widget API fails then present an error message
-    print("Failed")
+    # If widget not enabled for the server then present an error message
+    print("Widget not enabled")
 
 print()
