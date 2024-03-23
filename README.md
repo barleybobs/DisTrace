@@ -123,10 +123,13 @@ There are then a few options available:
 
 user.py is designed to assist with discovering information about a user from their user id.
 
-Run by `python user.py -u USER_ID -t DISCORD_BOT_TOKEN`
+Run by `python user.py -u USER_ID -a DISCORD_ACCOUNT_TOKEN -b DISCORD_BOT_TOKEN`
 
 > [!NOTE]
-> The Discord Bot does not need to share a server with the user being looked up. The bot token is only required for authorisation.
+> This script works with either an account token or a bot token. _(Both can be provided but the account token will be used)_ An account token can provide more detail if you have a common guild or are friends however.
+
+> [!CAUTION] 
+> **NEVER** share your account _(or bot token)_ with others as this will allow them access to your account _(or bot)_.
 
 This script can retrieve:
 
@@ -135,6 +138,13 @@ This script can retrieve:
 -   ID
 -   Avatar
 -   Nitro type
+
+If you have provided a account token and either have a common guild or are friends with the user then the script can also retrieve:
+
+-   Bio
+-   Connected accounts
+    -   Type
+    -   ID
 
 ## application.py
 
